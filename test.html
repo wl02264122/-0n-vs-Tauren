@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        margin: 0 auto;
+        min-width: 1000px;
+        width: 1000px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title {
+        font-size: 36px;
+        color: #f6724e;
+        font-weight: bolder;
+    }
+
+    .life {
+        font-size: 24px;
+        color: red;
+    }
+
+    .progress {
+        width: 800px;
+        height: 60px;
+        border-radius: 60px;
+        padding: 4px;
+        background-color: #232323;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .inner {
+        width: 800px;
+        height: 60px;
+        border-radius: 60px;
+        background-color: #f6724e;
+    }
+
+    .count {
+        margin-top: 40px;
+        font-size: 42px;
+    }
+
+    .item {
+        margin-top: 30px;
+        display: flex;
+        width: 600px;
+        justify-content: space-between;
+    }
+
+    .controlCountBtn {
+        padding: 32px;
+        font-size: 24px;
+    }
+
+    .talk {
+        margin-top: 10px;
+        font-size: 24px;
+    }
+
+    .img {
+        width: 100px;
+        background-color: #414141;
+        height: 100px;
+    }
+
+    .img img {
+        width: 100%;
+        background-repeat: no-repeat;
+        object-fit: cover;
+    }
+
+    .log {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        width: 300px;
+        height: 800px;
+        background-color: #3b3b3b57;
+        padding: 12px;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        text-wrap: nowrap;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="log">
+            <span>+0n遇到野生牛頭人純愛戰士!</span><br>
+            <span class="info" v-for="(item, index) in voice">
+                {{ item }}
+                <span>------------------------</span>
+            </span>
+        </div>
+        <div class="container">
+
+            <div class="img">
+                <img src="./img/cow.jpg" alt="">
+            </div>
+            <div class="title">牛頭人純愛戰士</div>
+            <div class="life">生命值 : {{ count }}</div>
+            <div class="progress">
+                <div class="inner" :style="{width:width +'px'}"></div>
+            </div>
+            <div class="talk">
+                {{ voice.at(-1) }}
+            </div>
+            <div class="item">
+                <button class="controlCountBtn" @click="fc0()">0%</button>
+                <button class="controlCountBtn" @click="fc25()">25%</button>
+                <button class="controlCountBtn" @click="fc50()">50%</button>
+                <button class="controlCountBtn" @click="fc75()">75%</button>
+                <button class="controlCountBtn" @click="fc100()">100%</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            voice: [],
+            locker: false,
+            count: 100,
+            width: 800
+        },
+        methods: {
+            fc0() {
+                if (this.voice.length === 15) {
+                    this.voice = [];
+                }
+                if (this.locker === false) {
+                    let innerCount = 0;
+                    if (this.count === 25) {
+                        console.dir(this.voice);
+
+                        this.voice.push("+0n對牛牛使出最後一擊! 成功攻略牛頭人純愛戰士");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 50) {
+                        this.voice.push("+0n經過一番惡鬥之後終於成功擊敗牛牛了!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 75) {
+                        this.voice.push("+0n經過一番惡鬥之後終於成功擊敗牛牛了!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 75) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 100) {
+                        this.voice.push("+0n成功對牛牛打出致命一擊! 成功攻略牛頭人純愛戰士");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 100) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                }
+            },
+            fc25() {
+                if (this.voice.length === 15) {
+                    this.voice = [];
+                }
+                if (this.locker === false) {
+                    let innerCount = 0;
+                    if (this.count === 0) {
+                        this.voice.push("旁邊有牛牛法師將牛牛戰士復活了! 復活後的牛牛與+0n再次陷入惡鬥");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 50) {
+                        this.voice.push("+0n對牛牛使出螺旋牙! 效果一般，牛牛看起來快要被擊敗了!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 75) {
+                        this.voice.push("+0n對牛牛使出問候老媽! 效果群拔，牛牛看起來快要被擊敗了!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                    if (this.count === 100) {
+                        this.voice.push("+0n對牛牛使出朗誦法律條文! 效果群拔，牛牛看起來快要被擊敗了!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 75) {
+                                clearInterval(runner);
+                            }
+                        }, 50);
+                    }
+                }
+            },
+            fc50() {
+                if (this.voice.length === 15) {
+                    this.voice = [];
+                }
+                if (this.locker === false) {
+                    let innerCount = 0;
+                    if (this.count === 0) {
+                        this.voice.push("旁邊有牛牛法師將牛牛戰士復活了! 復活後的牛牛與+0n再次陷入惡鬥");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 25) {
+                        this.voice.push("旁邊有牛牛法師正在偷偷幫牛牛戰士治療! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 75) {
+                        this.voice.push("+0n對牛牛使出大玉螺旋丸! 效果一般，牛牛看起來還能繼續戰鬥!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 100) {
+                        this.voice.push("+0n對牛牛使出優惠碼大放送! 效果群拔，牛牛一次性受到很多傷害!");
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                }
+            },
+            fc75() {
+                if (this.voice.length === 15) {
+                    this.voice = [];
+                }
+                if (this.locker === false) {
+                    let innerCount = 0;
+                    if (this.count === 0) {
+                        this.voice.push("旁邊有牛牛法師將牛牛戰士復活了! 復活後的牛牛與+0n再次陷入惡鬥");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 75) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 25) {
+                        this.voice.push("天上掉落一瓶藥水砸到牛牛! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 50) {
+                        this.voice.push("牛牛  在戰鬥中領悟了治療技能! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 100) {
+                        this.voice.push(("+0n對牛牛使出偷襲! 牛牛受到了一些傷害!"));
+
+                        let runner = setInterval(() => {
+                            this.width -= 8;
+                            this.count -= 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                }
+            },
+            fc100() {
+                if (this.voice.length === 15) {
+                    this.voice = [];
+                }
+                if (this.locker === false) {
+                    let innerCount = 0;
+                    if (this.count === 0) {
+                        this.voice.push("旁邊有牛牛法師將牛牛戰士復活了! 復活後的牛牛與+0n再次陷入惡鬥");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 100) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 25) {
+                        this.voice.push("旁邊有牛牛法師正在偷偷幫牛牛戰士治療! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 75) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 75) {
+                        this.voice.push("+0n用錯技能對牛牛丟出治療藥水! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 25) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                    if (this.count === 50) {
+                        this.voice.push("天上掉落一瓶藥水砸到牛牛! +0n的處境變得更加危險了!");
+
+                        let runner = setInterval(() => {
+                            this.width += 8;
+                            this.count += 1;
+                            innerCount += 1;
+                            if (innerCount === 50) {
+                                clearInterval(runner);
+                            }
+                        }, 35)
+                    }
+                }
+            },
+        }
+    })
+</script>
+
+</html>
